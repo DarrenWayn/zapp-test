@@ -4,6 +4,7 @@ import Link from "next/link";
 import styles from "../styles/Form.module.css";
 import Image from "next/image";
 import { HiAtSymbol, HiFingerPrint } from "react-icons/hi";
+import { signIn } from "next-auth/react";
 import { useState } from "react";
 
 const Login = () => {
@@ -59,7 +60,13 @@ const Login = () => {
             </button>
           </div>
           <div className="input-button">
-            <button type="button" className={styles.button_custom}>
+            <button
+              type="button"
+              onClick={async () =>
+                signIn("google", { callbackUrl: "http://localhost:3000" })
+              }
+              className={styles.button_custom}
+            >
               Sign In with Google
               <Image src={"/assets/google.svg"} width={25} height={25} alt="" />
             </button>
